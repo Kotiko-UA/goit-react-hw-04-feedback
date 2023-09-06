@@ -8,28 +8,18 @@ export const App = () => {
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
-  const [total, setTotal] = useState(0);
-  const [positivePercentage, setPositivePercentage] = useState(0);
+
+  const total = good + neutral + bad;
+  const positivePercentage = Math.round((good / total) * 100);
   const onGood = () => {
     setGood(prevState => prevState + 1);
-    setTotal(prevState => prevState + 1);
   };
   const onNeutral = () => {
     setNeutral(prevState => prevState + 1);
-    setTotal(prevState => prevState + 1);
   };
   const onBad = () => {
     setBad(prevState => prevState + 1);
-    setTotal(prevState => prevState + 1);
   };
-  useEffect(() => {
-    if (total === 0) {
-      setPositivePercentage(0);
-    } else {
-      const percentage = Math.round((good / total) * 100);
-      setPositivePercentage(percentage);
-    }
-  }, [good, total]);
 
   const options = [
     { id: nanoid(), name: 'good', method: onGood },
